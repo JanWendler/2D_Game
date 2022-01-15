@@ -1,0 +1,5 @@
+C:/Users/Jan/Projects/2D_Game/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Jan/Projects/2D_Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Jan/Projects/2D_Game/cmake-build-debug/src/CMakeFiles/2D_Game.dir
+C:/Users/Jan/Projects/2D_Game/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+C:/Users/Jan/Projects/2D_Game/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
