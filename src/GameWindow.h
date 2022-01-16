@@ -8,7 +8,7 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "Player.h"
+#include "GameObjectView.h"
 
 class GameWindow
 {
@@ -44,7 +44,8 @@ public:
 
 	void update(int red, int green, int blue, int alpha);
 	void update(std::string&& pictureName);
-	void update(const Player& player);
+
+	SDL_Renderer* getRenderer();
 
 private:
 	SDL_Window* window = nullptr;

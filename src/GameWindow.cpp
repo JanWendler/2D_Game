@@ -5,6 +5,7 @@
 #include "GameWindow.h"
 #include "SurfaceManager.h"
 #include "TextureManager.h"
+#include "GameObjectView.h"
 #include <iostream>
 
 namespace
@@ -56,6 +57,11 @@ void GameWindow::render()
 	SDL_RenderPresent(renderer);
 }
 
+SDL_Renderer* GameWindow::getRenderer()
+{
+	return renderer;
+}
+
 void GameWindow::update(int red, int green, int blue, int alpha)
 {
 	if (SDL_RenderClear(renderer) != 0)
@@ -91,38 +97,6 @@ void GameWindow::update(std::string&& pictureName)
 	}
 
 	if (SDL_RenderCopy(renderer, texture, NULL, NULL) != 0)
-	{
-		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-}
-
-void GameWindow::update(const Player& player)
-{
-	std::cout << "update with player info" << std::endl;
-	if (SDL_RenderClear(renderer) != 0)
-	{
-		std::cout << "SDL_RenderClear Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-
-	texture = TextureManager::LoadTexture(player.getTextureName(), renderer);
-	if (texture == nullptr)
-	{
-		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-
-	SDL_Rect destR;
-	destR.h = 128;
-	destR.w = 128;
-	destR.x = player.getX();
-	destR.y = 100;
-
-	if (SDL_RenderCopy(renderer, texture, NULL, &destR) != 0)
 	{
 		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
 		status = Error;

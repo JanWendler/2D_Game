@@ -11,10 +11,9 @@ class TextureManager
 {
 public:
 	/// \brief Loads the textures of a picture in to the texture parameter via the renderer
-	/// \param texture
-	/// \param fileName
+	/// \param filePath
 	/// \param renderer
-	static SDL_Texture* LoadTexture(const std::string& fileName, SDL_Renderer* renderer);
+	static SDL_Texture* LoadTexture(const std::string& filePath, SDL_Renderer* renderer);
 };
 
 #endif//INC_2D_GAME_SRC_TEXTUREMANAGER_H_
