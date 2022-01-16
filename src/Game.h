@@ -7,6 +7,7 @@
 
 #include "Error.h"
 #include "GameWindow.h"
+#include "Player.h"
 #include <string>
 
 class Game
@@ -54,7 +55,8 @@ private:
 	Status status = Error;
 	std::string errorMessage;
 	bool isRunning = false;
-	GameWindow* window;
+	GameWindow* window{};
+	Player* player{};
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

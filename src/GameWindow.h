@@ -6,8 +6,9 @@
 #define INC_2D_GAME_SRC_GAMEWINDOW_H_
 
 #include <string>
-#include "SDL2/SDL.h"
-#include "Error.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include "Player.h"
 
 class GameWindow
 {
@@ -43,10 +44,11 @@ public:
 
 	void update(int red, int green, int blue, int alpha);
 	void update(std::string&& pictureName);
+	void update(const Player& player);
+
 private:
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
-	SDL_Surface* surface = nullptr;
 	SDL_Texture* texture = nullptr;
 
 	Status status = Error;

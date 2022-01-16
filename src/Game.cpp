@@ -3,12 +3,13 @@
 //
 
 #include "Game.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <iostream>
 
 Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	window = new GameWindow(std::move(title), xpos, ypos, width, height, fullscreen);
+	player = new Player();
 	if (window->getStatus() == GameWindow::Error)
 	{
 		std::cout << window->getError() << std::endl;
@@ -59,15 +60,25 @@ void Game::run()
 }
 Game::~Game()
 {
-	std::cout << "Game Deconstructor" << std::endl;
+	std::cout << "Game Destructor" << std::endl;
 	delete window;
 }
 void Game::update()
 {
 	handleEvents();
-	window->update("picture.bmp");
+	player->update();
+	window->update(*player);
+	//window->update("Man.jpg");
+	if(window->getStatus() == GameWindow::Error)
+	{
+		isRunning = false;
+	}
 }
 void Game::render()
 {
 	window->render();
+	if(window->getStatus() == GameWindow::Error)
+	{
+		isRunning = false;
+	}
 }

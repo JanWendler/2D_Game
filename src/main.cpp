@@ -1,6 +1,9 @@
-
-#include <SDL2/SDL.h>
+#define SDL_MAIN_HANDLED
 #include "Game.h"
+#include <SDL.h>
+#include <iostream>
+
+bool hasSubstring(const std::string& mainString, const std::string& subString);
 
 int main(int argc, char* argv[])
 {
@@ -8,4 +11,3 @@ int main(int argc, char* argv[])
 	game->run();
 	return 0;
 }
-
