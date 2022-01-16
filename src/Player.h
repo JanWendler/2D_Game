@@ -27,7 +27,7 @@ public:
 private:
 	int x = 0;
 	int y = 0;
-	std::string textureName = "Man.bmp";
+	std::string textureName = "../../assets/Man.bmp";
 };
 
 #endif//INC_2D_GAME_SRC_PLAYER_H_

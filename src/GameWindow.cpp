@@ -3,7 +3,8 @@
 //
 
 #include "GameWindow.h"
-#include "Surface.h"
+#include "SurfaceManager.h"
+#include "TextureManager.h"
 #include <iostream>
 
 namespace
@@ -80,16 +81,8 @@ void GameWindow::update(std::string&& pictureName)
 		return;
 	}
 
-	std::string imagePath = getResourcePath(std::move(pictureName));
-	Surface surface = Surface(imagePath);
-	if (surface.getData() == nullptr)
-	{
-		std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
 
-	texture = SDL_CreateTextureFromSurface(renderer, surface.getData());
+	texture = TextureManager::LoadTexture(getResourcePath("Man.bmp"), renderer);
 	if (texture == nullptr)
 	{
 		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
@@ -115,22 +108,14 @@ void GameWindow::update(const Player& player)
 		return;
 	}
 
-	std::string imagePath = getResourcePath(player.getTextureName());
-	Surface surface = Surface(imagePath);
-	if (surface.getData() == nullptr)
-	{
-		std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-
-	texture = SDL_CreateTextureFromSurface(renderer, surface.getData());
+	texture = TextureManager::LoadTexture(player.getTextureName(), renderer);
 	if (texture == nullptr)
 	{
 		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
 		status = Error;
 		return;
 	}
+
 	SDL_Rect destR;
 	destR.h = 128;
 	destR.w = 128;
