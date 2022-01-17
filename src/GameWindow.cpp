@@ -60,6 +60,7 @@ GameWindow::GameWindow(std::string&& title, int xpos, int ypos, int width, int h
 void GameWindow::render()
 {
 	SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
 }
 
 SDL_Renderer* GameWindow::getRenderer()
@@ -93,7 +94,7 @@ void GameWindow::update(std::string&& pictureName)
 	}
 
 
-	texture = TextureManager::LoadTexture(getResourcePath("Man.bmp"), renderer);
+	texture = TextureManager::LoadTexture(getResourcePath("Man.bmp"));
 	if (texture == nullptr)
 	{
 		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;

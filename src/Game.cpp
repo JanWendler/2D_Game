@@ -9,7 +9,6 @@
 Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
-	player = new GameObjectController("Player","../../assets/Man.bmp");
 	if (window->getStatus() == GameWindow::Error)
 	{
 		std::cout << window->getError() << std::endl;
@@ -23,6 +22,8 @@ Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool 
 		status = Ok;
 		isRunning = true;
 	}
+	player = new GameObjectController("Player","../../assets/Man.bmp");
+	map = new Map();
 }
 
 Game* Game::getInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
@@ -68,7 +69,6 @@ void Game::update()
 {
 	handleEvents();
 	player->update(1,0);
-	//window->update("Man.jpg");
 	if(window->getStatus() == GameWindow::Error)
 	{
 		isRunning = false;
@@ -76,6 +76,7 @@ void Game::update()
 }
 void Game::render()
 {
+	map->render();
 	player->render();
 	window->render();
 	if(window->getStatus() == GameWindow::Error)

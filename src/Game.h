@@ -8,6 +8,7 @@
 #include "Error.h"
 #include "GameWindow.h"
 #include "GameObjectController.h"
+#include "Map.h"
 #include <string>
 
 class Game
@@ -58,6 +59,7 @@ private:
 	bool isRunning = false;
 	GameWindow* window;
 	GameObjectController* player;
+	Map* map;
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

@@ -13,7 +13,8 @@ public:
 	/// \brief Loads the textures of a picture in to the texture parameter via the renderer
 	/// \param filePath
 	/// \param renderer
-	static SDL_Texture* LoadTexture(const std::string& filePath, SDL_Renderer* renderer);
+	static SDL_Texture* LoadTexture(const std::string& filePath);
+	static void Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect);
 };
 
 #endif//INC_2D_GAME_SRC_TEXTUREMANAGER_H_

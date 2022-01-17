@@ -9,15 +9,10 @@
 
 void GameObjectView::render()
 {
-	if(SDL_RenderClear(renderer)!=0)
-	{
-		std::cout << "SDL_RenderClear Error: " << SDL_GetError() << std::endl;
-		return;
-	}
-
 	destrect.x = object.getCoordinates().getX();
 	destrect.y = object.getCoordinates().getY();
 
+	TextureManager::Draw(texture, srcrect, destrect);
 	if(SDL_RenderCopy(renderer, texture, NULL, &destrect)!= 0)
 	{
 		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
@@ -27,15 +22,15 @@ void GameObjectView::render()
 GameObjectView::GameObjectView(const std::string& texturePath, const GameObject& object):
 	renderer(GameWindow::getInstance()->getRenderer()), object(object)
 {
-	texture = TextureManager::LoadTexture(texturePath, renderer);
+	texture = TextureManager::LoadTexture(texturePath);
 
-	srcrect.h = 128;
-	srcrect.w = 128;
-	srcrect.x = 128;
-	srcrect.y = 128;
+	srcrect.h = 32;
+	srcrect.w = 32;
+	srcrect.x = 0;
+	srcrect.y = 0;
 
-	destrect.h = 128;
-	destrect.w = 128;
-	destrect.x = 128;
-	destrect.y = 128;
+	destrect.h = 32;
+	destrect.w = 32;
+	destrect.x = 0;
+	destrect.y = 0;
 }
