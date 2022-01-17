@@ -22,8 +22,7 @@ public:
 	/// \param width width of window
 	/// \param height height of window
 	/// \param fullscreen true = fullscreen \n false = borderless
-	GameWindow(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
-
+	static GameWindow* getInstance(std::string&& title = "", int xpos = 0, int ypos = 0, int width = 800, int height = 640, bool fullscreen = false);
 	~GameWindow();
 
 	enum Status{
@@ -46,7 +45,8 @@ public:
 	void update(std::string&& pictureName);
 
 	SDL_Renderer* getRenderer();
-
+protected:
+	GameWindow(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
 private:
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;

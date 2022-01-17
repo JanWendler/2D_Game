@@ -11,7 +11,7 @@
 class GameObjectView
 {
 public:
-	GameObjectView(const std::string& texturePath, SDL_Renderer* renderer, const GameObject& object);
+	GameObjectView(const std::string& texturePath, const GameObject& object);
 	void render();
 
 private:

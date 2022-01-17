@@ -8,8 +8,8 @@
 
 Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	window = new GameWindow(std::move(title), xpos, ypos, width, height, fullscreen);
-	player = new GameObjectController("Player","../../assets/Man.bmp",window->getRenderer());
+	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
+	player = new GameObjectController("Player","../../assets/Man.bmp");
 	if (window->getStatus() == GameWindow::Error)
 	{
 		std::cout << window->getError() << std::endl;

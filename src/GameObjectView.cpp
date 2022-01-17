@@ -5,6 +5,7 @@
 #include <iostream>
 #include "GameObjectView.h"
 #include "TextureManager.h"
+#include "GameWindow.h"
 
 void GameObjectView::render()
 {
@@ -22,8 +23,9 @@ void GameObjectView::render()
 		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
 	}
 }
-GameObjectView::GameObjectView(const std::string& texturePath, SDL_Renderer* renderer, const GameObject& object):
-	renderer(renderer), object(object)
+
+GameObjectView::GameObjectView(const std::string& texturePath, const GameObject& object):
+	renderer(GameWindow::getInstance()->getRenderer()), object(object)
 {
 	texture = TextureManager::LoadTexture(texturePath, renderer);
 

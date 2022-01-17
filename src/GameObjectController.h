@@ -10,7 +10,7 @@
 class GameObjectController
 {
 public:
-	GameObjectController(std::string name, const std::string& texturePath, SDL_Renderer* renderer);
+	GameObjectController(std::string name, const std::string& texturePath);
 	void update(int x, int y);
 	void render();
 private:
