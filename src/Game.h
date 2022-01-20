@@ -7,20 +7,21 @@
 
 #include "Error.h"
 #include "GameWindow.h"
-#include "GameObjectController.h"
 #include "Map.h"
+#include "EntityComponentSystem.h"
 #include <string>
+
 
 class Game
 {
 public:
-	static Game* getInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
+	static Game* createInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
 	Game(Game& other) = delete;
 	void operator=(const Game&) = delete;
 	~Game();
 
 	void run();
-
+	static SDL_Event event;
 protected:
 	Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
 
@@ -58,8 +59,9 @@ private:
 	std::string errorMessage;
 	bool isRunning = false;
 	GameWindow* window;
-	GameObjectController* player;
 	Map* map;
+	Manager manager;
+	Entity& player;
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

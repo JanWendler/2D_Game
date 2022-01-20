@@ -15,7 +15,6 @@ public:
 	void render();
 
 private:
-	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 	SDL_Rect srcrect, destrect;
 	std::string texturePath;

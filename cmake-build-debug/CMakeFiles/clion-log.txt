@@ -1,14 +1,4 @@
 C:\Users\Jan\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.6461.75\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/Jan/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.75/bin/ninja/win/ninja.exe -G Ninja C:\Users\Jan\Projects\2D_Game
-CMake Warning (dev) at C:/Users/Jan/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.75/bin/cmake/win/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
-  The package name passed to `find_package_handle_standard_args` (SDL) does
-  not match the name of the calling package (SDL2).  This can lead to
-  problems in calling code that expects `find_package` result variables
-  (e.g., `_FOUND`) to follow a certain pattern.
-Call Stack (most recent call first):
-  cmake/FindSDL2.cmake:198 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-  src/CMakeLists.txt:4 (find_package)
-This warning is for project developers.  Use -Wno-dev to suppress it.
-
 -- Configuring done
 -- Generating done
 -- Build files have been written to: C:/Users/Jan/Projects/2D_Game/cmake-build-debug

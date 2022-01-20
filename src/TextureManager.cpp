@@ -9,9 +9,17 @@
 
 SDL_Texture* TextureManager::LoadTexture(const std::string& filePath)
 {
+	SDL_Texture* tex = nullptr;
 	SurfaceManager surface = SurfaceManager(filePath);
-	return SDL_CreateTextureFromSurface(GameWindow::getInstance()->getRenderer(), surface.getData());
+	tex = SDL_CreateTextureFromSurface(GameWindow::getInstance()->getRenderer(), surface.getData());
+	if(tex == nullptr)
+	{
+		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
+		return tex;
+	}
+	return tex ;
 }
+
 void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect)
 {
 	if(SDL_RenderCopy(GameWindow::getInstance()->getRenderer(), texture, &srcrect, &destrect)!= 0)

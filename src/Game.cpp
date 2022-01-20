@@ -3,10 +3,22 @@
 //
 
 #include "Game.h"
+#include "components/Components.h"
+#include "components/TransformComponent.h"
+#include "GameWindow.h"
 #include <SDL.h>
 #include <iostream>
 
-Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+SDL_Event Game::event;
+
+Game* Game::createInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+{
+	static Game instance {std::move(title), xpos, ypos, width, height, fullscreen};
+	return &instance;
+}
+
+Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen):
+	  player(manager.addEntity())
 {
 	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
 	if (window->getStatus() == GameWindow::Error)
@@ -18,23 +30,44 @@ Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool 
 	}
 	else
 	{
-
 		status = Ok;
 		isRunning = true;
 	}
-	player = new GameObjectController("Player","../../assets/Man.bmp");
+	player.addComponent<TransformComponent>();
+	player.addComponent<SpriteComponent>("../../assets/Man.png");
+	player.addComponent<KeyboardController>();
 	map = new Map();
 }
 
-Game* Game::getInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+void Game::run()
 {
-	static Game instance = Game(std::move(title), xpos, ypos, width, height, fullscreen);
-	return &instance;
-}
+	const unsigned int FPS = 60;
+	const unsigned int frameDelay = 1000/FPS;
+	unsigned int frameStart;
+	unsigned int frameTime;
+	if (status == Error)
+	{
+		std::cout << "Game Error: " << getError() << std::endl;
+		return;
+	}
+	while(isRunning)
+	{
+		frameStart = SDL_GetTicks();
+		handleEvents();
+		update();
+		render();
 
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if(frameDelay > frameTime)
+		{
+			SDL_Delay(frameDelay - frameTime);
+		}
+	}
+
+}
 void Game::handleEvents()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
@@ -46,41 +79,32 @@ void Game::handleEvents()
 	}
 }
 
-void Game::run()
-{
-	if (status == Error)
-	{
-		std::cout << "Game Error: " << getError() << std::endl;
-		return;
-	}
-	while(isRunning)
-	{
-		update();
-		render();
-	}
-
-}
-Game::~Game()
-{
-	std::cout << "Game Destructor" << std::endl;
-	delete window;
-}
 void Game::update()
 {
-	handleEvents();
-	player->update(1,0);
-	if(window->getStatus() == GameWindow::Error)
+	manager.refresh();
+	manager.update();
+	if(player.getComponent<TransformComponent>().position.x >= 100)
 	{
-		isRunning = false;
+		player.getComponent<SpriteComponent>().setTexture("../../assets/Enemy.png");
+	}
+	else
+	{
+		player.getComponent<SpriteComponent>().setTexture("../../assets/Man.png");
 	}
 }
+
 void Game::render()
 {
 	map->render();
-	player->render();
+	manager.render();
 	window->render();
 	if(window->getStatus() == GameWindow::Error)
 	{
 		isRunning = false;
 	}
+}
+Game::~Game()
+{
+	std::cout << "Game Destructor" << std::endl;
+	delete window;
 }
