@@ -30,7 +30,7 @@ public:
 		}
 		transform = &entity->getComponent<TransformComponent>();
 
-		Game::colliders.push_back(this);
+		Game::getInstance()->getColliders()->push_back(this);
 
 	}
 

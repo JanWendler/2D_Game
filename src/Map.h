@@ -6,24 +6,11 @@
 #define INC_2D_GAME_SRC_MAP_H_
 
 #include <SDL.h>
+#include <string>
 class Map
 {
 public:
-	Map();
-
-	void LoadMap(int arr[20][25]);
-	void render();
-	~Map();
-
-private:
-
-	SDL_Rect srcrect, destrect;
-
-	SDL_Texture* dirt;
-	SDL_Texture* grass;
-	SDL_Texture* water;
-
-	int map[20][25];
+	static void LoadMap(const std::string& path, int sizeX, int sizeY);
 };
 
 #endif//INC_2D_GAME_SRC_MAP_H_

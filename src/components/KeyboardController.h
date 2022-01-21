@@ -12,7 +12,7 @@ class KeyboardController : public Component
 {
 public:
 	TransformComponent *transform;
-	const SDL_Event* event;
+	SDL_Event* event;
 	void init() override
 	{
 		if(!entity->hasComponent<TransformComponent>())
@@ -20,7 +20,21 @@ public:
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
-		event = &Game::event;
+		if(Game::getInstance() == nullptr)
+		{
+			std::cout << "this is fucked!" << std::endl;
+		}
+		else
+		{
+			if(Game::getInstance()->getEvent() == nullptr)
+			{
+				std::cout << "this is still fucked!" << std::endl;
+			}
+			else
+			{
+				event = Game::getInstance()->getEvent();
+			}
+		}
 	}
 
 	void update() override

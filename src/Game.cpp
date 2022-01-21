@@ -9,17 +9,15 @@
 #include <SDL.h>
 #include <iostream>
 
-SDL_Event Game::event;
-std::vector<ColliderComponent*> Game::colliders;
 
-Game* Game::getInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+Game* Game::getInstance(std::string title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	static Game instance = Game(std::move(title), xpos, ypos, width, height, fullscreen);
+	static Game instance {std::move(title), xpos, ypos, width, height, fullscreen};
 	return &instance;
 }
 
-Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
-	: player(manager.addEntity()), wall(manager.addEntity()), tile0(manager.addEntity()), tile1(manager.addEntity()), tile2(manager.addEntity())
+Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen):
+	player(manager.addEntity()),wall(manager.addEntity())
 {
 	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
 	if (window->getStatus() == GameWindow::Error)
@@ -34,23 +32,22 @@ Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool 
 		status = Ok;
 		isRunning = true;
 	}
-
-	tile0.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	tile1.addComponent<TileComponent>(250, 250, 32, 32, 1);
-	tile1.addComponent<ColliderComponent>("dirt");
-	tile2.addComponent<TileComponent>(300, 300, 32, 32, 2);
-	tile2.addComponent<ColliderComponent>("grass");
+}
+void Game::init()
+{
 
 	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>("../../assets/Man.png");
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("Player");
+	player.addGroup(groupPlayers);
 
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
 	wall.addComponent<SpriteComponent>("../../assets/dirt.bmp");
 	wall.addComponent<ColliderComponent>("Wall");
+	wall.addGroup(groupMap);
 
-	map = new Map();
+	Map::LoadMap("../../assets/Level1.map", 32, 32);
 }
 
 void Game::run()
@@ -64,6 +61,7 @@ void Game::run()
 		std::cout << "Game Error: " << getError() << std::endl;
 		return;
 	}
+	init();
 	while (isRunning)
 	{
 		frameStart = SDL_GetTicks();
@@ -103,11 +101,24 @@ void Game::update()
 	}
 
 }
-
 void Game::render()
 {
-	//map->render();
-	manager.render();
+	auto& tiles(manager.getGroup(groupMap));
+	auto& players(manager.getGroup(groupPlayers));
+	auto& enemies(manager.getGroup(groupEnemies));
+
+	for(auto& t : tiles)
+	{
+		t->render();
+	}
+	for(auto& p : players)
+	{
+		p->render();
+	}
+	for(auto& e : enemies)
+	{
+		e->render();
+	}
 	window->render();
 	if (window->getStatus() == GameWindow::Error)
 	{
@@ -118,4 +129,10 @@ Game::~Game()
 {
 	std::cout << "Game Destructor" << std::endl;
 	delete window;
+}
+void Game::addTile(int id, int x, int y)
+{
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(x,y,32,32,id);
+	tile.addGroup(groupMap);
 }

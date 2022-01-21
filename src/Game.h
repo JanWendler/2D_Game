@@ -5,10 +5,9 @@
 #ifndef INC_2D_GAME_SRC_GAME_H_
 #define INC_2D_GAME_SRC_GAME_H_
 
-#include "Error.h"
+#include "EntityComponentSystem.h"
 #include "GameWindow.h"
 #include "Map.h"
-#include "EntityComponentSystem.h"
 #include <string>
 
 class ColliderComponent;
@@ -16,14 +15,35 @@ class ColliderComponent;
 class Game
 {
 public:
-	static Game* getInstance(std::string&& title = "", int xpos = 0, int ypos = 0, int width = 800, int height = 0, bool fullscreen = false);
+	static Game* getInstance(std::string title = "", int xpos = 0, int ypos = 0, int width = 800, int height = 0, bool fullscreen = false);
+
 	Game(Game& other) = delete;
+
 	void operator=(const Game&) = delete;
+
 	~Game();
 
 	void run();
-	static SDL_Event event;
-	static std::vector<ColliderComponent*> colliders;
+
+	void addTile(int id, int x, int y);
+
+	SDL_Event* getEvent()
+	{
+		return &event;
+	}
+
+	std::vector<ColliderComponent*>* getColliders()
+	{
+		return &colliders;
+	}
+
+	enum groupLabels : std::size_t
+	{
+		groupMap,
+		groupPlayers,
+		groupEnemies,
+		groupColliders
+	};
 
 protected:
 	Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
@@ -53,6 +73,7 @@ protected:
 	{
 		return isRunning;
 	}
+	void init();
 	void handleEvents();
 	void update();
 	void render();
@@ -62,13 +83,11 @@ private:
 	std::string errorMessage;
 	bool isRunning = false;
 	GameWindow* window;
-	Map* map;
 	Manager manager;
 	Entity& player;
 	Entity& wall;
-	Entity& tile0;
-	Entity& tile1;
-	Entity& tile2;
+	SDL_Event event;
+	std::vector<ColliderComponent*> colliders;
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

@@ -16,6 +16,10 @@ private:
 	SDL_Texture* texture;
 	SDL_Rect srcrect, destrect;
 
+	bool animated = false;
+	int frames = 0;
+	int speed = 100;
+
 public:
 	SpriteComponent() = default;
 	explicit SpriteComponent(const std::string& path)
@@ -26,7 +30,11 @@ public:
 			std::cout << "LoadTexture Error: " << SDL_GetError() << std::endl;
 		}
 	}
-
+	SpriteComponent(const std::string& path, int mFrames, int mSpeed)
+		: animated(true), frames(mFrames), speed(mSpeed)
+	{
+		setTexture(path);
+	}
 	void setTexture(const std::string path)
 	{
 		texture = TextureManager::LoadTexture(path);
@@ -51,6 +59,10 @@ public:
 	}
 	void update() override
 	{
+		if (animated)
+		{
+			srcrect.x = srcrect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+		}
 		destrect.x = static_cast<int>(transform->position.x);
 		destrect.y = static_cast<int>(transform->position.y);
 		destrect.w = transform->width * transform->scale;
