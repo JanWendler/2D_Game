@@ -4,7 +4,9 @@
 
 #ifndef INC_2D_GAME_SRC_VECTOR2D_H_
 #define INC_2D_GAME_SRC_VECTOR2D_H_
+
 #include <iostream>
+
 class Vector2D
 {
 public:

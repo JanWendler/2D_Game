@@ -9,5 +9,5 @@
 #include "SpriteComponent.h"
 #include "KeyboardController.h"
 #include "ColliderComponent.h"
-
+#include "Collision.h"
 #endif//INC_2D_GAME_SRC_COMPONENTS_H_

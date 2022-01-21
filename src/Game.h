@@ -11,7 +11,7 @@
 #include "EntityComponentSystem.h"
 #include <string>
 
-class Collider;
+class ColliderComponent;
 
 class Game
 {
@@ -23,6 +23,8 @@ public:
 
 	void run();
 	static SDL_Event event;
+	static std::vector<ColliderComponent*> colliders;
+
 protected:
 	Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
 
@@ -64,6 +66,9 @@ private:
 	Manager manager;
 	Entity& player;
 	Entity& wall;
+	Entity& tile0;
+	Entity& tile1;
+	Entity& tile2;
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

@@ -5,10 +5,12 @@
 #ifndef INC_2D_GAME_SRC_COMPONENTS_COLLIDERCOMPONENT_H_
 #define INC_2D_GAME_SRC_COMPONENTS_COLLIDERCOMPONENT_H_
 
-#include "TransformComponent.h"
 #include <SDL.h>
 #include <string>
 #include <utility>
+#include "../Game.h"
+#include "TransformComponent.h"
+
 class ColliderComponent : public Component
 {
 public:
@@ -27,6 +29,9 @@ public:
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
+
+		Game::colliders.push_back(this);
+
 	}
 
 	void update() override

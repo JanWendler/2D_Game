@@ -5,9 +5,9 @@
 #ifndef INC_2D_GAME_SRC_COMPONENTS_TRANSFORMCOMPONENT_H_
 #define INC_2D_GAME_SRC_COMPONENTS_TRANSFORMCOMPONENT_H_
 
+#include <iostream>
 #include "../EntityComponentSystem.h"
 #include "../Vector2D.h"
-#include <iostream>
 
 class TransformComponent : public Component
 {
