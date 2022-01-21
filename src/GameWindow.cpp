@@ -3,9 +3,7 @@
 //
 
 #include "GameWindow.h"
-#include "SurfaceManager.h"
 #include "TextureManager.h"
-#include "GameObjectView.h"
 #include <iostream>
 
 namespace
@@ -66,48 +64,6 @@ void GameWindow::render()
 SDL_Renderer* GameWindow::getRenderer()
 {
 	return renderer;
-}
-
-void GameWindow::update(int red, int green, int blue, int alpha)
-{
-	if (SDL_RenderClear(renderer) != 0)
-	{
-		std::cout << "SDL_RenderClear Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-	if (SDL_SetRenderDrawColor(renderer, red, green, blue, alpha) != 0)
-	{
-		std::cout << "SDL_SetRenderDrawColor Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-}
-
-void GameWindow::update(std::string&& pictureName)
-{
-	if (SDL_RenderClear(renderer) != 0)
-	{
-		std::cout << "SDL_RenderClear Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-
-
-	texture = TextureManager::LoadTexture(getResourcePath("Man.bmp"));
-	if (texture == nullptr)
-	{
-		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
-
-	if (SDL_RenderCopy(renderer, texture, NULL, NULL) != 0)
-	{
-		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
-		status = Error;
-		return;
-	}
 }
 
 GameWindow::~GameWindow()

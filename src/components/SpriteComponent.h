@@ -5,8 +5,8 @@
 #ifndef INC_2D_GAME_SRC_COMPONENTS_SPRITECOMPONENT_H_
 #define INC_2D_GAME_SRC_COMPONENTS_SPRITECOMPONENT_H_
 
-#include "TransformComponent.h"
 #include "../TextureManager.h"
+#include "TransformComponent.h"
 #include <SDL.h>
 
 class SpriteComponent : public Component
@@ -33,29 +33,38 @@ public:
 	}
 	void init() override
 	{
+		if (!entity->hasComponent<TransformComponent>())
+		{
+			entity->addComponent<TransformComponent>();
+		}
 		transform = &entity->getComponent<TransformComponent>();
 
 		srcrect.x = 0;
 		srcrect.y = 0;
-		srcrect.w = 32;
-		srcrect.h = 32;
+		srcrect.w = transform->width;
+		srcrect.h = transform->height;
 
-		destrect.x = transform->position.x;
-		destrect.y = transform->position.y;
-		destrect.w = 32;
-		destrect.h = 32;
+		destrect.x = static_cast<int>(transform->position.x);
+		destrect.y = static_cast<int>(transform->position.y);
+		destrect.w = transform->width * transform->scale;
+		destrect.h = transform->height * transform->scale;
 	}
 	void update() override
 	{
-		destrect.x = (int)transform->position.x;
-		destrect.y = (int)transform->position.y;
+		destrect.x = static_cast<int>(transform->position.x);
+		destrect.y = static_cast<int>(transform->position.y);
+		destrect.w = transform->width * transform->scale;
+		destrect.h = transform->height * transform->scale;
 	};
 
 	void render() override
 	{
 		TextureManager::Draw(texture, srcrect, destrect);
 	}
-	~SpriteComponent() override = default;
+	~SpriteComponent() override
+	{
+		SDL_DestroyTexture(texture);
+	};
 };
 
 #endif//INC_2D_GAME_SRC_COMPONENTS_SPRITECOMPONENT_H_

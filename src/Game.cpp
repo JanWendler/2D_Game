@@ -6,19 +6,20 @@
 #include "components/Components.h"
 #include "components/TransformComponent.h"
 #include "GameWindow.h"
+#include "components/Collision.h"
 #include <SDL.h>
 #include <iostream>
 
 SDL_Event Game::event;
 
-Game* Game::createInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+Game* Game::getInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	static Game instance {std::move(title), xpos, ypos, width, height, fullscreen};
+	static Game instance  = Game(std::move(title), xpos, ypos, width, height, fullscreen);
 	return &instance;
 }
 
 Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen):
-	  player(manager.addEntity())
+	  player(manager.addEntity()), wall(manager.addEntity())
 {
 	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
 	if (window->getStatus() == GameWindow::Error)
@@ -36,6 +37,12 @@ Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool 
 	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>("../../assets/Man.png");
 	player.addComponent<KeyboardController>();
+	player.addComponent<ColliderComponent>("Player");
+
+	wall.addComponent<TransformComponent>(300.0f,300.0f,300,20,1);
+	wall.addComponent<SpriteComponent>("../../assets/dirt.bmp");
+	wall.addComponent<ColliderComponent>("Wall");
+
 	map = new Map();
 }
 
@@ -83,13 +90,11 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-	if(player.getComponent<TransformComponent>().position.x >= 100)
+
+	if(Collision::AABB(player.getComponent<ColliderComponent>().collider, wall.getComponent<ColliderComponent>().collider))
 	{
-		player.getComponent<SpriteComponent>().setTexture("../../assets/Enemy.png");
-	}
-	else
-	{
-		player.getComponent<SpriteComponent>().setTexture("../../assets/Man.png");
+		player.getComponent<TransformComponent>().velocity * -1;
+		std::cout << "Wall hit" << std::endl;
 	}
 }
 

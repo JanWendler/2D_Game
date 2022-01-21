@@ -8,7 +8,6 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "GameObjectView.h"
 
 class GameWindow
 {
@@ -40,9 +39,6 @@ public:
 	[[nodiscard]] std::string getError() const {return errorMessage;}
 
 	void render();
-
-	void update(int red, int green, int blue, int alpha);
-	void update(std::string&& pictureName);
 
 	SDL_Renderer* getRenderer();
 protected:

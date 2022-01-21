@@ -15,6 +15,10 @@ public:
 	const SDL_Event* event;
 	void init() override
 	{
+		if(!entity->hasComponent<TransformComponent>())
+		{
+			entity->addComponent<TransformComponent>();
+		}
 		transform = &entity->getComponent<TransformComponent>();
 		event = &Game::event;
 	}

@@ -63,3 +63,15 @@ std::ostream& operator<<(std::ostream& ostream, const Vector2D& vec)
 	ostream << "(" << vec.x << "," << vec.y << ")";
 	return ostream;
 }
+Vector2D& Vector2D::operator*(const float& i)
+{
+	this->x *= i;
+	this->y *= i;
+	return *this;
+}
+Vector2D& Vector2D::Zero()
+{
+	this->x = 0;
+	this->y = 0;
+	return *this;
+}

@@ -11,11 +11,12 @@
 #include "EntityComponentSystem.h"
 #include <string>
 
+class Collider;
 
 class Game
 {
 public:
-	static Game* createInstance(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen);
+	static Game* getInstance(std::string&& title = "", int xpos = 0, int ypos = 0, int width = 800, int height = 0, bool fullscreen = false);
 	Game(Game& other) = delete;
 	void operator=(const Game&) = delete;
 	~Game();
@@ -62,6 +63,7 @@ private:
 	Map* map;
 	Manager manager;
 	Entity& player;
+	Entity& wall;
 };
 
 #endif//INC_2D_GAME_SRC_GAME_H_

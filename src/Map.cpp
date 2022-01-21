@@ -57,8 +57,8 @@ void Map::render()
 		for (int column = 0; column < 25; ++column)
 		{
 			type = map[row][column];
-			destrect.x = column*srcrect.w;
-			destrect.y = row*srcrect.h;
+			destrect.x = column * srcrect.w;
+			destrect.y = row * srcrect.h;
 			switch (type)
 			{
 			case 0:
@@ -69,7 +69,16 @@ void Map::render()
 				break;
 			case 2:
 				TextureManager::Draw(dirt, srcrect, destrect);
+				break;
+			default:
+				break;
 			}
 		}
 	}
+}
+Map::~Map()
+{
+	SDL_DestroyTexture(grass);
+	SDL_DestroyTexture(dirt);
+	SDL_DestroyTexture(water);
 }

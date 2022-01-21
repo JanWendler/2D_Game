@@ -15,14 +15,27 @@ public:
 	Vector2D position;
 	Vector2D velocity;
 
+	int height = 32;
+	int width = 32;
+	int scale = 1;
 	float speed = 3;
 
 	TransformComponent()
-		: position(0, 0)
+		: TransformComponent(0, 0, 32, 32, 1)
 	{
 	}
+	explicit TransformComponent(int sc)
+		: TransformComponent(0, 0, 32, 32, sc)
+	{
+	}
+
 	TransformComponent(float x, float y)
-		: position(x, y)
+		: TransformComponent(x, y, 32, 32, 1)
+	{
+	}
+
+	TransformComponent(float x, float y, int h, int w, int sc)
+		: position(x, y), height(h), width(w), scale(sc)
 	{
 	}
 
