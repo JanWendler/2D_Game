@@ -9,15 +9,14 @@
 #include <SDL.h>
 #include <iostream>
 
-
 Game* Game::getInstance(std::string title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	static Game instance {std::move(title), xpos, ypos, width, height, fullscreen};
+	static Game instance{std::move(title), xpos, ypos, width, height, fullscreen};
 	return &instance;
 }
 
-Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen):
-	player(manager.addEntity()),wall(manager.addEntity())
+Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool fullscreen)
+	: player(manager.addEntity()), wall(manager.addEntity())
 {
 	window = GameWindow::getInstance(std::move(title), xpos, ypos, width, height, fullscreen);
 	if (window->getStatus() == GameWindow::Error)
@@ -36,8 +35,8 @@ Game::Game(std::string&& title, int xpos, int ypos, int width, int height, bool 
 void Game::init()
 {
 
-	player.addComponent<TransformComponent>();
-	player.addComponent<SpriteComponent>("../../assets/Man.png");
+	player.addComponent<TransformComponent>(2);
+	player.addComponent<SpriteComponent>("../../assets/Man_walking.png", 8, 150);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("Player");
 	player.addGroup(groupPlayers);
@@ -95,11 +94,10 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	for(auto cc: colliders)
+	for (auto cc: colliders)
 	{
-		Collision::AABB(player.getComponent<ColliderComponent>(),*cc);
+		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
 	}
-
 }
 void Game::render()
 {
@@ -107,15 +105,15 @@ void Game::render()
 	auto& players(manager.getGroup(groupPlayers));
 	auto& enemies(manager.getGroup(groupEnemies));
 
-	for(auto& t : tiles)
+	for (auto& t: tiles)
 	{
 		t->render();
 	}
-	for(auto& p : players)
+	for (auto& p: players)
 	{
 		p->render();
 	}
-	for(auto& e : enemies)
+	for (auto& e: enemies)
 	{
 		e->render();
 	}
@@ -133,6 +131,6 @@ Game::~Game()
 void Game::addTile(int id, int x, int y)
 {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(x,y,32,32,id);
+	tile.addComponent<TileComponent>(x, y, 32, 32, id);
 	tile.addGroup(groupMap);
 }

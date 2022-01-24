@@ -79,63 +79,63 @@ build cmake_object_order_depends_target_2D_Game: phony || src/CMakeFiles/2D_Game
 
 build src/CMakeFiles/2D_Game.dir/main.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/main.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/Game.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/Game.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\Game.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/GameWindow.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/GameWindow.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\GameWindow.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/TextureManager.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/TextureManager.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\TextureManager.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/Coordinates.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/Coordinates.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\Coordinates.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/Map.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/Map.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\Map.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/EntityComponentSystem.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/EntityComponentSystem.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\EntityComponentSystem.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/Vector2D.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/Vector2D.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\Vector2D.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir
 
 build src/CMakeFiles/2D_Game.dir/components/Collision.cpp.obj: CXX_COMPILER__2D_Game_Debug C$:/Users/Jan/Projects/2D_Game/src/components/Collision.cpp || cmake_object_order_depends_target_2D_Game
   DEP_FILE = src\CMakeFiles\2D_Game.dir\components\Collision.cpp.obj.d
-  FLAGS = -g -std=gnu++2a
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++2a
   INCLUDES = -IC:/Libraries/SDL2-2.0.20/i686-w64-mingw32/include/SDL2 -IC:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
   OBJECT_FILE_DIR = src\CMakeFiles\2D_Game.dir\components
@@ -149,7 +149,7 @@ build src/CMakeFiles/2D_Game.dir/components/Collision.cpp.obj: CXX_COMPILER__2D_
 # Link the executable src\2D_Game.exe
 
 build src/2D_Game.exe: CXX_EXECUTABLE_LINKER__2D_Game_Debug src/CMakeFiles/2D_Game.dir/main.cpp.obj src/CMakeFiles/2D_Game.dir/Game.cpp.obj src/CMakeFiles/2D_Game.dir/GameWindow.cpp.obj src/CMakeFiles/2D_Game.dir/TextureManager.cpp.obj src/CMakeFiles/2D_Game.dir/Coordinates.cpp.obj src/CMakeFiles/2D_Game.dir/Map.cpp.obj src/CMakeFiles/2D_Game.dir/EntityComponentSystem.cpp.obj src/CMakeFiles/2D_Game.dir/Vector2D.cpp.obj src/CMakeFiles/2D_Game.dir/components/Collision.cpp.obj | C$:/Libraries/SDL2-2.0.20/i686-w64-mingw32/lib/libSDL2.dll.a C$:/Libraries/SDL2-2.0.20/i686-w64-mingw32/lib/libSDL2main.a C$:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/lib/libSDL2_image.dll.a
-  FLAGS = -g
+  FLAGS = -static-libstdc++ -static-libgcc -g
   LINK_FLAGS = -static-libgcc -static-libstdc++
   LINK_LIBRARIES = -lmingw32  -mwindows  C:/Libraries/SDL2-2.0.20/i686-w64-mingw32/lib/libSDL2.dll.a  C:/Libraries/SDL2-2.0.20/i686-w64-mingw32/lib/libSDL2main.a  C:/Libraries/SDL2_image-2.0.5/i686-w64-mingw32/lib/libSDL2_image.dll.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = src\CMakeFiles\2D_Game.dir
