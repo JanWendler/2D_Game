@@ -14,7 +14,7 @@ public:
 	/// \param filePath
 	/// \param renderer
 	static SDL_Texture* LoadTexture(const std::string& filePath);
-	static void Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect);
+	static void Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect, SDL_RendererFlip flip);
 };
 
 #endif//INC_2D_GAME_SRC_TEXTUREMANAGER_H_

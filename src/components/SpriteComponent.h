@@ -7,7 +7,9 @@
 
 #include "../TextureManager.h"
 #include "TransformComponent.h"
+#include "Animation.h"
 #include <SDL.h>
+#include <map>
 
 class SpriteComponent : public Component
 {
@@ -17,10 +19,18 @@ private:
 	SDL_Rect srcrect, destrect;
 
 	bool animated = false;
-	int frames = 0;
-	int speed = 100;
-
+	int animFrames = 0;
+	int animSpeed = 100;
+	int animIndex = 0;
+	std::map <std::string, Animation> animations;
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 public:
+	enum FlipDir
+	{
+		None,
+		Horizontal,
+		Vertical
+	};
 	SpriteComponent() = default;
 	explicit SpriteComponent(const std::string& path)
 	{
@@ -30,12 +40,20 @@ public:
 			std::cout << "LoadTexture Error: " << SDL_GetError() << std::endl;
 		}
 	}
-	SpriteComponent(const std::string& path, int mFrames, int mSpeed)
-		: animated(true), frames(mFrames), speed(mSpeed)
+	SpriteComponent(const std::string& path, bool isAnimated)
+		: animated(isAnimated)
 	{
+		Animation idle = Animation(0,3,100);
+		Animation walk = Animation(1,8,100);
+
+		animations.emplace("Idle", idle);
+		animations.emplace("Walk", walk);
+
+		play("Idle");
+
 		setTexture(path);
 	}
-	void setTexture(const std::string path)
+	void setTexture(const std::string& path)
 	{
 		texture = TextureManager::LoadTexture(path);
 	}
@@ -63,6 +81,7 @@ public:
 		{
 			srcrect.x = srcrect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
+		srcrect.y = animIndex * transform->height;
 		destrect.x = static_cast<int>(transform->position.x);
 		destrect.y = static_cast<int>(transform->position.y);
 		destrect.w = transform->width * transform->scale;
@@ -71,7 +90,29 @@ public:
 
 	void render() override
 	{
-		TextureManager::Draw(texture, srcrect, destrect);
+		TextureManager::Draw(texture, srcrect, destrect, spriteFlip);
+	}
+	void play(const std::string& animName)
+	{
+		animFrames = animations[animName].frames;
+		animIndex = animations[animName].index;
+		animSpeed = animations[animName].speed;
+	}
+	void flip(FlipDir flipDir)
+	{
+		switch (flipDir)
+		{
+
+		case None:
+			spriteFlip = SDL_FLIP_NONE;
+			break;
+		case Horizontal:
+			spriteFlip = SDL_FLIP_HORIZONTAL;
+			break;
+		case Vertical:
+			spriteFlip = SDL_FLIP_VERTICAL;
+			break;
+		}
 	}
 	~SpriteComponent() override
 	{

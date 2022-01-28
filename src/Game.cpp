@@ -36,7 +36,7 @@ void Game::init()
 {
 
 	player.addComponent<TransformComponent>(2);
-	player.addComponent<SpriteComponent>("../../assets/Man_walking.png", 8, 150);
+	player.addComponent<SpriteComponent>("../../assets/Man_walking.png", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("Player");
 	player.addGroup(groupPlayers);

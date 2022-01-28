@@ -20,9 +20,9 @@ SDL_Texture* TextureManager::LoadTexture(const std::string& filePath)
 	return tex ;
 }
 
-void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect)
+void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect destrect, SDL_RendererFlip flip)
 {
-	if(SDL_RenderCopy(GameWindow::getInstance()->getRenderer(), texture, &srcrect, &destrect)!= 0)
+	if(SDL_RenderCopyEx(GameWindow::getInstance()->getRenderer(), texture, &srcrect, &destrect, NULL, NULL, flip)!= 0)
 	{
 		std::cout << "SDL_RenderCopy Error: " << SDL_GetError() << std::endl;
 	}

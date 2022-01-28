@@ -11,7 +11,8 @@
 class KeyboardController : public Component
 {
 public:
-	TransformComponent *transform;
+	TransformComponent* transform;
+	SpriteComponent* sprite;
 	SDL_Event* event;
 	void init() override
 	{
@@ -35,6 +36,7 @@ public:
 				event = Game::getInstance()->getEvent();
 			}
 		}
+		sprite = &entity->getComponent<SpriteComponent>();
 	}
 
 	void update() override
@@ -46,15 +48,20 @@ public:
 			{
 			case SDLK_w:
 				transform->velocity.y = -1;
+				sprite->play("Walk");
 				break;
 			case SDLK_a:
 				transform->velocity.x = -1;
+				sprite->play("Walk");
+				sprite->flip(SpriteComponent::Horizontal);
 				break;
 			case SDLK_s:
 				transform->velocity.y = 1;
+				sprite->play("Walk");
 				break;
 			case SDLK_d:
 				transform->velocity.x = 1;
+				sprite->play("Walk");
 				break;
 			default:
 				break;
@@ -67,15 +74,20 @@ public:
 			{
 			case SDLK_w:
 				transform->velocity.y = 0;
+				sprite->play("Idle");
 				break;
 			case SDLK_a:
 				transform->velocity.x = 0;
+				sprite->play("Idle");
+				sprite->flip(SpriteComponent::None);
 				break;
 			case SDLK_s:
 				transform->velocity.y = 0;
+				sprite->play("Idle");
 				break;
 			case SDLK_d:
 				transform->velocity.x = 0;
+				sprite->play("Idle");
 				break;
 			default:
 				break;
